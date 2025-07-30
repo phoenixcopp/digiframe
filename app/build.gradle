@@ -10,6 +10,11 @@ plugins {
     id 'application'
 }
 
+application {
+    // Define the main class for the application.
+    mainClass = 'digiframe.App'
+}
+
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
@@ -32,12 +37,22 @@ java {
     }
 }
 
-application {
-    // Define the main class for the application.
-    mainClass = 'digiframe.App'
-}
 
-tasks.named('test') {
+test {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+jar {
+    // Add the main class to the JAR manifest.
+    manifest {
+        attributes(
+            'Main-Class': application.mainClass
+        )
+    }
+
+    // Include the dependencies in the JAR.
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }

@@ -3,14 +3,12 @@
  */
 package digiframe;
 
-//import digiframe.window.AppWindow;
-
+import digiframe.frames.AppWindow;
 
 public class App {
 
     public static void main(String[] args) {
-        System.out.println("Hello and welcome to DigiFrame!");
-
-        //AppWindow appWindow = new AppWindow();
+        AppWindow appWindow = new AppWindow();
+        appWindow.show();
     }
 }
