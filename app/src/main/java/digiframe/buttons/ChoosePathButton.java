@@ -24,7 +24,7 @@ public class ChoosePathButton extends JButton implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String selectedPath = getPath();
         if (selectedPath != null) {
-            frame.setImage(selectedPath); // Call a method on Frame to update the image
+            frame.setImageForNewPhoto(selectedPath); // Call a method on Frame to update the image
         }
     }
 

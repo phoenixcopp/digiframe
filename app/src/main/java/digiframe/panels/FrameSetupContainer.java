@@ -32,25 +32,22 @@ public class FrameSetupContainer extends JPanel {
         JPanel bottomPanel = new JPanel();
         bottomPanel.setBackground(Color.GRAY);
         bottomPanel.setLayout(new FlowLayout());
+            // Add/close frame button
         FrameDisplayPanel frameDisplayPanel = new FrameDisplayPanel(frame.getFrameDisplayButton());
         bottomPanel.add(frameDisplayPanel);
+
 
         // Top panel (80%)
         JPanel topPanel = new JPanel();
         topPanel.setBackground(Color.LIGHT_GRAY);
         topPanel.setLayout(new GridLayout(4, 2)); // 2x2 grid for components
+            // Path setup
         PathSetupPanel pathSetupPanel = new PathSetupPanel(frame.getChoosePathButton());
         topPanel.add(pathSetupPanel);
-
-
-        JPanel aspectRatioSetup = new JPanel();
-        JPanel frameSizeSetup = new JPanel();
-        JPanel borderSetup = new JPanel();
-        
-
-        topPanel.add(aspectRatioSetup);
-        topPanel.add(frameSizeSetup);
-        topPanel.add(borderSetup);
+            // Aspect ratio setup
+        AspectRationSetupPanel aspectRationSetupPanel = new AspectRationSetupPanel(frame.getAspectRatioDropDown(),
+            frame.getFrameSizeDropDown());
+        topPanel.add(aspectRationSetupPanel);
        
         
         // Set layout for the container
