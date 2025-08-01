@@ -2,10 +2,7 @@ package digiframe.frames;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-import digiframe.buttons.ChoosePathButton;
 import digiframe.panels.FrameSetupContainer;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -24,18 +21,19 @@ public class AppWindow {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setBackground(Color.WHITE);
         
+        // Create the main panel with two FrameSetupContainers side by sid
         JPanel mainPanel = new JPanel();
         mainPanel.setPreferredSize(new Dimension(1100,700));
         mainPanel.setLayout(new GridLayout(1, 2));
         mainPanel.add(new FrameSetupContainer());
         mainPanel.add(new FrameSetupContainer());
-
+        
+        // Layout for the main frame
         frame.setLayout(new FlowLayout());
         frame.add(mainPanel);
     }
 
     public void show() {
-        // Logic to display the window
         frame.setVisible(true);
     }
 }

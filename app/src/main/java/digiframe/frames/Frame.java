@@ -1,19 +1,20 @@
 package digiframe.frames;
 
 import javax.swing.border.Border;
-
-import digiframe.buttons.AspectRatioDropDown;
-import digiframe.buttons.ChoosePathButton;
-import digiframe.buttons.FrameDisplayButton;
-import digiframe.buttons.FrameSizeDropDown;
+import digiframe.interactions.AspectRatioDropDown;
+import digiframe.interactions.BorderColorChooser;
+import digiframe.interactions.BorderSizeInput;
+import digiframe.interactions.ChooseColorButton;
+import digiframe.interactions.ChoosePathButton;
+import digiframe.interactions.FrameDisplayButton;
+import digiframe.interactions.FrameSizeDropDown;
+import digiframe.panels.ChooseColorPanel;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
-import java.net.URL;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,23 +25,45 @@ import javax.swing.JPanel;
 public class Frame extends JFrame {
     private ImageIcon imageIcon;
     private JLabel imageLabel;
-    String frameSize;
-    String aspectRatio;
+    private String frameSize;
+    private String aspectRatio;
+    private Color borderColor;
+    private int borderThickness;
+    private Border border;
+    private int mouseX;
+    private int mouseY;
 
     public Frame() {
         // Initialize the frame
         setTitle("Picture Frame");
         frameSize = "Medium";
         aspectRatio = "3:2";
+        borderColor = Color.WHITE;
+        borderThickness = 3;
         setSize(600, 400); // Default size
-        setUndecorated(false);
-        Border border = BorderFactory.createLineBorder(Color.WHITE, 3);
-        ((JPanel) this.getContentPane()).setBorder(border);
+        setUndecorated(true);
+        setNewBorder(border);
         imageLabel = new JLabel();
         imageIcon = new ImageIcon(getClass().getResource("/default.png"));
         setImageForNewSize(imageIcon);
         setLayout(new BorderLayout());
         add(imageLabel, BorderLayout.CENTER);
+
+        addMouseListener(new java.awt.event.MouseAdapter() {
+    
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent e) {
+            mouseX = e.getXOnScreen() - getX();
+            mouseY = e.getYOnScreen() - getY();
+            }
+        });
+
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(java.awt.event.MouseEvent e) {
+                setLocation(e.getXOnScreen() - mouseX, e.getYOnScreen() - mouseY);
+            }
+        });
     }   
 
     public void setImageForNewPhoto(String path) {
@@ -83,6 +106,23 @@ public class Frame extends JFrame {
 
     public FrameSizeDropDown getFrameSizeDropDown() {
         return new FrameSizeDropDown(this);
+    }
+
+
+    public BorderSizeInput getBorderSizeInput() {
+        return new BorderSizeInput(this);
+    }
+
+    public ColorChooserFrame getColorChooserFrame() {
+        return new ColorChooserFrame(this, new ChooseColorPanel(this));
+    }
+
+    public BorderColorChooser getBorderColorChooser() {
+        return new BorderColorChooser(this);
+    }
+
+    public ChooseColorButton getChooseColorButton() {
+        return new ChooseColorButton(this, getColorChooserFrame());
     }
 
     public void setAspectRatio(String aspectRatio) {
@@ -215,5 +255,26 @@ public class Frame extends JFrame {
                 setSize(600, 400);
         }
         setImageForNewSize(icon);
+    }
+
+    public void setBorderColor(Color color) {
+        this.borderColor = color;
+        setNewBorder(border);
+    }
+
+    public void setBorderThickness(int thickness) {
+        this.borderThickness = thickness;
+        setNewBorder(border);
+    }
+
+    public Color getBorderColor() {
+        return borderColor;
+    }
+
+    public void setNewBorder(Border border) {
+        border = BorderFactory.createLineBorder(borderColor, borderThickness);
+        ((JPanel) this.getContentPane()).setBorder(border);
+        revalidate();
+        repaint();
     }
 }

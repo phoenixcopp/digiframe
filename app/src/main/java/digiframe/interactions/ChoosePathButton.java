@@ -1,12 +1,13 @@
-package digiframe.buttons;
+package digiframe.interactions;
+
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.JFileChooser;
 
-import digiframe.frames.Frame;
 
+import digiframe.frames.Frame;
 import javax.swing.JButton;
 
 public class ChoosePathButton extends JButton implements ActionListener {

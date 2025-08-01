@@ -1,4 +1,4 @@
-package digiframe.buttons;
+package digiframe.interactions;
 
 import javax.swing.JComboBox;
 import digiframe.frames.Frame;
@@ -11,6 +11,7 @@ public class AspectRatioDropDown extends JComboBox<String> {
         this.frame = frame;
         setBounds(100, 120, 200, 40);
         setFocusable(false);
+        setSelectedItem("3:2"); // Default selection
         
         // Add an action listener to handle aspect ratio changes
         addActionListener(e -> {

@@ -1,7 +1,6 @@
-package digiframe.buttons;
+package digiframe.interactions;
 
 import javax.swing.JComboBox;
-
 import digiframe.frames.Frame;
 
 public class FrameSizeDropDown extends JComboBox<String> {
@@ -12,6 +11,7 @@ public class FrameSizeDropDown extends JComboBox<String> {
         this.frame = frame;
         setBounds(100, 200, 200, 40);
         setFocusable(false);
+        setSelectedItem("Medium"); // Default selection to Medium
         
         // Add an action listener to handle size changes
         addActionListener(e -> {

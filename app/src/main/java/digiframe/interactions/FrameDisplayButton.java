@@ -1,4 +1,4 @@
-package digiframe.buttons;
+package digiframe.interactions;
 
 import javax.swing.JButton;
 

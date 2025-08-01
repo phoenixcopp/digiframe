@@ -1,17 +1,12 @@
 package digiframe.panels;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-
-import digiframe.buttons.ChoosePathButton;
-import digiframe.buttons.FrameDisplayButton;
 import digiframe.frames.Frame;
-
 import javax.swing.BorderFactory;
 
 public class FrameSetupContainer extends JPanel {
@@ -31,39 +26,46 @@ public class FrameSetupContainer extends JPanel {
         // Bottom panel (20%)
         JPanel bottomPanel = new JPanel();
         bottomPanel.setBackground(Color.GRAY);
-        bottomPanel.setLayout(new FlowLayout());
-            // Add/close frame button
+        bottomPanel.setLayout(new GridBagLayout()); // Explicitly center contents
+            // Add/close frame button and position
         FrameDisplayPanel frameDisplayPanel = new FrameDisplayPanel(frame.getFrameDisplayButton());
-        bottomPanel.add(frameDisplayPanel);
-
+        GridBagConstraints gbcBottom = new GridBagConstraints();
+        gbcBottom.gridx = 0;
+        gbcBottom.gridy = 0;
+        gbcBottom.weightx = 1.0;
+        gbcBottom.weighty = 1.0;
+        gbcBottom.anchor = GridBagConstraints.CENTER;
+        gbcBottom.fill = GridBagConstraints.NONE;
+        bottomPanel.add(frameDisplayPanel, gbcBottom);
 
         // Top panel (80%)
         JPanel topPanel = new JPanel();
         topPanel.setBackground(Color.LIGHT_GRAY);
-        topPanel.setLayout(new GridLayout(4, 2)); // 2x2 grid for components
+        topPanel.setLayout(new GridLayout(3, 1)); // 2x2 grid for components
             // Path setup
         PathSetupPanel pathSetupPanel = new PathSetupPanel(frame.getChoosePathButton());
         topPanel.add(pathSetupPanel);
-            // Aspect ratio setup
+            // Aspect ratio & frame size setup
         AspectRationSetupPanel aspectRationSetupPanel = new AspectRationSetupPanel(frame.getAspectRatioDropDown(),
             frame.getFrameSizeDropDown());
         topPanel.add(aspectRationSetupPanel);
-       
+            // Border setup
+        BorderSetupPanel borderSetupPanel = new BorderSetupPanel(frame.getBorderSizeInput(), 
+            frame.getChooseColorButton());
+        topPanel.add(borderSetupPanel);
         
         // Set layout for the container
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
-
         // Top panel (80%)
         gbc.gridy = 0;
-        gbc.weighty = 0.8;
+        gbc.weighty = 0.90;
         add(topPanel, gbc);
-
         // Bottom panel (20%)
         gbc.gridy = 1;
-        gbc.weighty = 0.2;
+        gbc.weighty = 0.1;
         add(bottomPanel, gbc);
     }
 }
