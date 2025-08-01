@@ -19,5 +19,4 @@ public class ColorChooserFrame extends JFrame {
     public void showFrame() {
         setVisible(true);
     }
-    
 }

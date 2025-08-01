@@ -16,14 +16,9 @@ public class ChooseColorPanel extends JPanel {
     public ChooseColorPanel(Frame frame) {
         // Initialize the color chooser panel
         this.frame = frame;
-        setLayout(new FlowLayout());
         this.borderColorChooser = new BorderColorChooser(frame);
+        setLayout(new FlowLayout());
+        setOpaque(false);
         add(borderColorChooser, BorderLayout.CENTER);
-        // Add components for color selection here
-        // For example, you can add a button to open a color chooser frame
-        // and a preview panel to show the selected color.
     }
-    
-    // Additional methods to handle color selection can be added here
-    
 }

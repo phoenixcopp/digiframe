@@ -14,8 +14,8 @@ public class FrameDisplayPanel extends JPanel {
     public FrameDisplayPanel(FrameDisplayButton frameDisplayButton) {
         // Initialize the panel with the frame display button
         setLayout(new FlowLayout());
+        setOpaque(false);
         add(frameDisplayButton);
-
         Border border = BorderFactory.createLineBorder(Color.RED, 2);
         setBorder(border);
     }

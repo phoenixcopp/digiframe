@@ -130,47 +130,33 @@ public class Frame extends JFrame {
         // This could involve resizing the frame or changing the layout
         switch (aspectRatio) {
             case "16:9":
-                aspectRatio = "16:9";
-                break;
             case "4:3":
-                aspectRatio = "4:3";
-                break;
             case "3:2":
-                aspectRatio = "3:2";
-                break;
             case "9:16":
-                aspectRatio = "9:16";
-                break;
-            case "3:4": 
-                aspectRatio = "3:4";
-                break;
+            case "3:4":
             case "2:3":
-                aspectRatio = "2:3";
+                this.aspectRatio = aspectRatio;
                 break;
             default:
-                // Default size or handle other cases
-                aspectRatio = "3:2";
+                // Do not change aspectRatio if input is unrecognized
+                return;
         }
-        setFrameSize(frameSize, aspectRatio, imageIcon);
+        setFrameSize(frameSize, this.aspectRatio, imageIcon);
     }
     
     public void setSML(String size) {
         // Logic to set the frame size based on the selected size
         switch (size) {
             case "Small":
-                frameSize = "Small";
-                break;
             case "Medium":
-                frameSize = "Medium";
-                break;
             case "Large":
-                frameSize = "Large";
+                this.frameSize = size;
                 break;
             default:
-                // Default size or handle other cases
-                frameSize = "Medium";
+                // Do not change frameSize if input is unrecognized
+                return;
         }
-        setFrameSize(frameSize, aspectRatio, imageIcon);
+        setFrameSize(this.frameSize, aspectRatio, imageIcon);
     }
 
     public void setFrameSize(String size, String aspectRatio, ImageIcon icon) {

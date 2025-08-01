@@ -22,3 +22,7 @@ Eventual Ideas:
 - suffle a folder of photos 
  - add transisiton effects
 - use new UI tool/library to make look better
+
+
+Bugs to fix:
+- when switching frame size it will also switch back to default aspect ratio (3:2)
