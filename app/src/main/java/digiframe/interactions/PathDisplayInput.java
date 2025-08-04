@@ -1,8 +1,6 @@
 package digiframe.interactions;
 
-
 import java.awt.Font;
-
 import javax.swing.JTextField;
 
 public class PathDisplayInput extends JTextField {
@@ -11,12 +9,12 @@ public class PathDisplayInput extends JTextField {
     public PathDisplayInput(ChoosePathButton choosePathButton) {
         super("No path selected");
         this.choosePathButton = choosePathButton;
-        setPreferredSize(new java.awt.Dimension(250, 35)); // width, height
+        setPreferredSize(new java.awt.Dimension(250, 35));
         setEditable(false);
         setFocusable(true);
         setHorizontalAlignment(JTextField.CENTER);
         setBackground(new java.awt.Color(194, 194, 194)); 
-        setFont(getFont().deriveFont(Font.BOLD, 14f)); // Set a larger font size
+        setFont(getFont().deriveFont(Font.BOLD, 14f));
     }
 
     public void updatePath(String path) {

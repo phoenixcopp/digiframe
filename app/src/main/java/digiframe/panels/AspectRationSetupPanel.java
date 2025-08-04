@@ -2,11 +2,9 @@ package digiframe.panels;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
-
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-
 import digiframe.frames.Frame;
 import digiframe.interactions.AspectRatioDropDown;
 import digiframe.interactions.FrameSizeDropDown;

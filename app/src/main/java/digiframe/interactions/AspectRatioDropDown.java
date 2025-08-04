@@ -11,9 +11,8 @@ public class AspectRatioDropDown extends JComboBox<String> {
         this.frame = frame;
         setBounds(100, 120, 200, 40);
         setFocusable(false);
-        setSelectedItem("3:2"); // Default selection
+        setSelectedItem("3:2"); 
         
-        // Add an action listener to handle aspect ratio changes
         addActionListener(e -> {
             String selectedRatio = (String) getSelectedItem();
             if (selectedRatio != null) {

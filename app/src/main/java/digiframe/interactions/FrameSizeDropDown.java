@@ -11,9 +11,8 @@ public class FrameSizeDropDown extends JComboBox<String> {
         this.frame = frame;
         setBounds(100, 200, 200, 40);
         setFocusable(false);
-        setSelectedItem("Medium"); // Default selection to Medium
+        setSelectedItem("Medium"); 
         
-        // Add an action listener to handle size changes
         addActionListener(e -> {
             String selectedSize = (String) getSelectedItem();
             if (selectedSize != null) {
@@ -21,5 +20,4 @@ public class FrameSizeDropDown extends JComboBox<String> {
             }
         });
     }
-    
 }

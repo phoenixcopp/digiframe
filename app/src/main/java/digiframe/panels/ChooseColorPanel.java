@@ -2,23 +2,23 @@ package digiframe.panels;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import digiframe.frames.Frame;
-
 import javax.swing.JPanel;
-
+import digiframe.frames.Frame;
 import digiframe.interactions.BorderColorChooser;
 
 public class ChooseColorPanel extends JPanel {
 
-    private final Frame frame;
-    private final BorderColorChooser borderColorChooser;
+    private final ColorPreviewPanel colorPreviewPanel;
 
-    public ChooseColorPanel(Frame frame) {
-        // Initialize the color chooser panel
-        this.frame = frame;
-        this.borderColorChooser = new BorderColorChooser(frame);
+    public ChooseColorPanel(Frame frame, ColorPreviewPanel colorPreviewPanel) {
+        this.colorPreviewPanel = colorPreviewPanel;
         setLayout(new FlowLayout());
         setOpaque(false);
+        BorderColorChooser borderColorChooser = new BorderColorChooser(frame, colorPreviewPanel);
         add(borderColorChooser, BorderLayout.CENTER);
+    }
+
+    public ColorPreviewPanel getColorPreviewPanel() {
+        return colorPreviewPanel;
     }
 }

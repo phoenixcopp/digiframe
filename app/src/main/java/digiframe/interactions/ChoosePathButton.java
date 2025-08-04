@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.Timer;
-import digiframe.frames.Frame;
 import javax.swing.JButton;
+import digiframe.frames.Frame;
 
 public class ChoosePathButton extends JButton implements ActionListener {
     private final Frame frame;

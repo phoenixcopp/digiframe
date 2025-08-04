@@ -1,7 +1,6 @@
 package digiframe.frames;
 
 import javax.swing.JFrame;
-
 import digiframe.panels.ChooseColorPanel;
 
 public class ColorChooserFrame extends JFrame {

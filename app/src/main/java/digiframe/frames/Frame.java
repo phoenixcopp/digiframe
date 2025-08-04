@@ -10,8 +10,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
 
-// Lets right a function that will resize the image to fit the frame
-// We will need to do this frequently when the frame is resized or when a new image is set
 public class Frame extends JFrame {
     private ImageIcon imageIcon;
     private JLabel imageLabel;
@@ -30,7 +28,7 @@ public class Frame extends JFrame {
         aspectRatio = "3:2";
         borderColor = Color.WHITE;
         borderThickness = 3;
-        setSize(600, 400); // Default size
+        setSize(600, 400);
         setUndecorated(true);
         setNewBorder(border);
         imageLabel = new JLabel();
@@ -80,8 +78,6 @@ public class Frame extends JFrame {
     }
 
     public void setAspectRatio(String aspectRatio) {
-        // Logic to set the aspect ratio of the frame
-        // This could involve resizing the frame or changing the layout
         switch (aspectRatio) {
             case "16:9":
             case "4:3":
@@ -99,7 +95,6 @@ public class Frame extends JFrame {
     }
     
     public void setSML(String size) {
-        // Logic to set the frame size based on the selected size
         switch (size) {
             case "Small":
             case "Medium":
@@ -114,7 +109,6 @@ public class Frame extends JFrame {
     }
 
     public void setFrameSize(String size, String aspectRatio, ImageIcon icon) {
-        // Logic to set the frame size based on the selected size
         switch (size) {
             case "Small":
                 switch (aspectRatio) {
@@ -205,10 +199,6 @@ public class Frame extends JFrame {
     public void setBorderThickness(int thickness) {
         this.borderThickness = thickness;
         setNewBorder(border);
-    }
-
-    public Color getBorderColor() {
-        return borderColor;
     }
 
     public void setNewBorder(Border border) {
