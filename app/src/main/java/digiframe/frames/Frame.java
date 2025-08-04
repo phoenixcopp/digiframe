@@ -1,27 +1,17 @@
 package digiframe.frames;
 
 import javax.swing.border.Border;
-import digiframe.interactions.AspectRatioDropDown;
-import digiframe.interactions.BorderColorChooser;
-import digiframe.interactions.BorderSizeInput;
-import digiframe.interactions.ChooseColorButton;
-import digiframe.interactions.ChoosePathButton;
-import digiframe.interactions.FrameDisplayButton;
-import digiframe.interactions.FrameSizeDropDown;
-import digiframe.panels.ChooseColorPanel;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Image;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Image;
 
 // Lets right a function that will resize the image to fit the frame
 // We will need to do this frequently when the frame is resized or when a new image is set
-
 public class Frame extends JFrame {
     private ImageIcon imageIcon;
     private JLabel imageLabel;
@@ -49,15 +39,14 @@ public class Frame extends JFrame {
         setLayout(new BorderLayout());
         add(imageLabel, BorderLayout.CENTER);
 
+        // Make the frame draggable
         addMouseListener(new java.awt.event.MouseAdapter() {
-    
             @Override
             public void mousePressed(java.awt.event.MouseEvent e) {
             mouseX = e.getXOnScreen() - getX();
             mouseY = e.getYOnScreen() - getY();
             }
         });
-
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             @Override
             public void mouseDragged(java.awt.event.MouseEvent e) {
@@ -82,47 +71,12 @@ public class Frame extends JFrame {
     }
 
     public void display() {
-        // Logic to display the frame
         setVisible(true);
     }
 
     public void close() {
-        // Logic to close the frame
         setVisible(false);
         dispose();
-    }
-
-    public FrameDisplayButton getFrameDisplayButton() {
-        return new FrameDisplayButton(this);
-    }
-
-    public ChoosePathButton getChoosePathButton() {
-        return new ChoosePathButton(this);
-    }
-
-    public AspectRatioDropDown getAspectRatioDropDown() {
-        return new AspectRatioDropDown(this);
-    }
-
-    public FrameSizeDropDown getFrameSizeDropDown() {
-        return new FrameSizeDropDown(this);
-    }
-
-
-    public BorderSizeInput getBorderSizeInput() {
-        return new BorderSizeInput(this);
-    }
-
-    public ColorChooserFrame getColorChooserFrame() {
-        return new ColorChooserFrame(this, new ChooseColorPanel(this));
-    }
-
-    public BorderColorChooser getBorderColorChooser() {
-        return new BorderColorChooser(this);
-    }
-
-    public ChooseColorButton getChooseColorButton() {
-        return new ChooseColorButton(this, getColorChooserFrame());
     }
 
     public void setAspectRatio(String aspectRatio) {

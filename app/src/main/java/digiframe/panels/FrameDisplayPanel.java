@@ -1,22 +1,17 @@
 package digiframe.panels;
 
-import java.awt.Color;
 import java.awt.FlowLayout;
-
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
+import digiframe.frames.Frame;
 import digiframe.interactions.FrameDisplayButton;
 
 public class FrameDisplayPanel extends JPanel {
 
-    public FrameDisplayPanel(FrameDisplayButton frameDisplayButton) {
+    public FrameDisplayPanel(Frame frame) {
         // Initialize the panel with the frame display button
         setLayout(new FlowLayout());
         setOpaque(false);
-        add(frameDisplayButton);
-        Border border = BorderFactory.createLineBorder(Color.RED, 2);
-        setBorder(border);
+        add(new FrameDisplayButton(frame));
     }
 }
