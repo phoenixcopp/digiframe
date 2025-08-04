@@ -30,6 +30,7 @@ public class BorderColorChooser extends JColorChooser {
                 frame.setBorderColor(newColor);
                 if (colorPreviewPanel != null) {
                     colorPreviewPanel.updateColor(newColor);
+                    colorPreviewPanel.updateBorderColor(newColor);
                 }
             }
         });

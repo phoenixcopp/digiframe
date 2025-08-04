@@ -13,7 +13,6 @@ import digiframe.interactions.ChooseColorButton;
 public class BorderSetupPanel extends JPanel {
 
     public BorderSetupPanel(Frame frame) {
-
         setLayout(new FlowLayout());
         setOpaque(false);
 
