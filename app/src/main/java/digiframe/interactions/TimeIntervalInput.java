@@ -6,27 +6,25 @@ public class TimeIntervalInput extends JTextField {
     private final ChoosePathButton choosePathButton;
 
     public TimeIntervalInput(ChoosePathButton choosePathButton) {
-        super("3"); // Default delay in milliseconds
+        super("3"); 
         this.choosePathButton = choosePathButton;
         setBounds(100, 220, 200, 40);
         setFocusable(true);
         
-        // Add an action listener to handle delay changes
         addActionListener(e -> {
             try {
                 int newDelay = Integer.parseInt(getText());
-                if (newDelay >= 1 && newDelay <= 300) { // Validate delay
+                if (newDelay >= 1 && newDelay <= 300) { 
                     choosePathButton.delay = newDelay * 1000;
                     if (choosePathButton.slideshowTimer != null) {
-                        choosePathButton.startSlideshow(); // Restart slideshow with new delay
+                        choosePathButton.startSlideshow(); 
                     }
                 } else {
-                    setText("3"); // Reset to default if invalid input
+                    setText("3"); 
                 }
             } catch (NumberFormatException ex) {
-                setText("3"); // Reset to default on error
+                setText("3"); 
             }
         });
-    }
-    
+    }  
 }

@@ -1,11 +1,9 @@
 package digiframe.interactions;
 
 import javax.swing.JButton;
-
-import digiframe.frames.Frame;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import digiframe.frames.Frame;
 
 public class FrameDisplayButton extends JButton implements ActionListener {
     private final Frame frame;

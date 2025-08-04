@@ -1,22 +1,21 @@
 package digiframe.frames;
 
 import javax.imageio.ImageIO;
+import java.io.IOException;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import digiframe.panels.FrameSetupContainer;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.io.IOException;
+import digiframe.panels.FrameSetupContainer;
 
 public class AppWindow {
 
     JFrame frame = new JFrame();
-        // Custom panel that paints the background image
+    
+    // Custom panel that paints the background image
     static class BackgroundPanel extends JPanel {
         private final Image backgroundImage;
 
@@ -48,7 +47,7 @@ public class AppWindow {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       
-        // Create the main panel with two FrameSetupContainers side by sid
+        // Create the main panel with two FrameSetupContainers side by side
         BackgroundPanel mainPanel = new BackgroundPanel();
         mainPanel.setPreferredSize(new Dimension(1100,700));
         mainPanel.setLayout(new GridLayout(1, 2, 40, 40)); // 20px horizontal gap, 0px vertical gap

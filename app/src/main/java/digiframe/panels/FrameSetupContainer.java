@@ -6,21 +6,18 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import javax.imageio.ImageIO;
 import java.io.IOException;
-
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-import digiframe.frames.Frame;
-
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import digiframe.frames.Frame;
 
 public class FrameSetupContainer extends JPanel {
     boolean frameExists = false;
     private Image backgroundImage;
 
     public FrameSetupContainer() {
-        // Initialize the frame object
         Frame frame = new Frame();
 
 
@@ -39,8 +36,8 @@ public class FrameSetupContainer extends JPanel {
         // Bottom panel (20%)
         JPanel bottomPanel = new JPanel();
         bottomPanel.setOpaque(false);
-        bottomPanel.setLayout(new GridBagLayout()); // Explicitly center contents
-            // Add/close frame button and position
+        bottomPanel.setLayout(new GridBagLayout()); 
+        
         FrameDisplayPanel frameDisplayPanel = new FrameDisplayPanel(frame);
         GridBagConstraints gbcBottom = new GridBagConstraints();
         gbcBottom.gridx = 0;
@@ -57,9 +54,7 @@ public class FrameSetupContainer extends JPanel {
         topPanel.setLayout(new GridLayout(3, 1)); // 2x2 grid for components
         topPanel.add(new PathSetupPanel(frame));
         topPanel.add(new AspectRationSetupPanel(frame));
-            // Border setup
-        BorderSetupPanel borderSetupPanel = new BorderSetupPanel(frame);
-        topPanel.add(borderSetupPanel);
+        topPanel.add(new BorderSetupPanel(frame));
         
         // Set layout for the container
         GridBagConstraints gbc = new GridBagConstraints();
