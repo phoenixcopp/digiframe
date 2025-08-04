@@ -14,6 +14,14 @@ public class BorderColorChooser extends JColorChooser {
     public BorderColorChooser(Frame frame) {
         super();
         this.frame = frame;
+        
+        // Remove all chooser panels except "Swatches"
+        for (var panel : getChooserPanels()) {
+            if (!panel.getDisplayName().equals("Swatches")) {
+                removeChooserPanel(panel);
+            }
+        }
+
         getSelectionModel().addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
