@@ -15,14 +15,27 @@ public class ColorPreviewPanel extends JPanel  {
         setOpaque(true);
         setPreferredSize(new Dimension(30, 30));
         setBackground(Color.WHITE);
-        Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
-        setBorder(border);
+        setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
     }
 
     public void updateColor(Color color) {
         setBackground(color);
         if (borderColorChooser != null) {
             borderColorChooser.setColor(color);
+        }   
+    }
+
+    private static boolean isDark(Color color) {
+        double grayBrightness = 0.299 * 128 + 0.587 * 128 + 0.114 * 128;
+        double colorBrightness = 0.299 * color.getRed() + 0.587 * color.getGreen() + 0.114 * color.getBlue();
+        return colorBrightness < grayBrightness;
+    }
+
+    public void updateBorderColor(Color color) {
+        if (isDark(color)) {
+            setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+        } else {
+            setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         }
     }
 }
