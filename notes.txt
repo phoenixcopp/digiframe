@@ -1,20 +1,3 @@
-Need to make Frame class that is created when "add frame" button is clicked
-
-Frame class contains:
-    - aspect ratio
-    - size (base on aspect ratio)
-    - path to picture (chosen by user, need to find library that accomplishes this)
-    - border thickness and color  (chosen by user, find a color wheel library)
-    - At first just do one photo, then can move onto shuffling through photos
-        - shuffle logic
-            - only display files that are photos, if not a photo then skip
-            - no repeats until all photos have been displayed
-            - interval
-    - delete frame function
-
-
-
-
 
 Eventual Ideas:
 - when program launched, goes back to state it was in before it was closed last
@@ -22,7 +5,3 @@ Eventual Ideas:
 - suffle a folder of photos 
  - add transisiton effects
 - use new UI tool/library to make look better
-
-
-Bugs to fix:
-- when switching frame size it will also switch back to default aspect ratio (3:2)

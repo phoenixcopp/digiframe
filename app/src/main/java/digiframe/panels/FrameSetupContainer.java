@@ -41,7 +41,7 @@ public class FrameSetupContainer extends JPanel {
         bottomPanel.setOpaque(false);
         bottomPanel.setLayout(new GridBagLayout()); // Explicitly center contents
             // Add/close frame button and position
-        FrameDisplayPanel frameDisplayPanel = new FrameDisplayPanel(frame.getFrameDisplayButton());
+        FrameDisplayPanel frameDisplayPanel = new FrameDisplayPanel(frame);
         GridBagConstraints gbcBottom = new GridBagConstraints();
         gbcBottom.gridx = 0;
         gbcBottom.gridy = 0;
@@ -55,16 +55,10 @@ public class FrameSetupContainer extends JPanel {
         JPanel topPanel = new JPanel();
         topPanel.setOpaque(false);
         topPanel.setLayout(new GridLayout(3, 1)); // 2x2 grid for components
-            // Path setup
-        PathSetupPanel pathSetupPanel = new PathSetupPanel(frame.getChoosePathButton());
-        topPanel.add(pathSetupPanel);
-            // Aspect ratio & frame size setup
-        AspectRationSetupPanel aspectRationSetupPanel = new AspectRationSetupPanel(frame.getAspectRatioDropDown(),
-            frame.getFrameSizeDropDown());
-        topPanel.add(aspectRationSetupPanel);
+        topPanel.add(new PathSetupPanel(frame));
+        topPanel.add(new AspectRationSetupPanel(frame));
             // Border setup
-        BorderSetupPanel borderSetupPanel = new BorderSetupPanel(frame.getBorderSizeInput(), 
-            frame.getChooseColorButton());
+        BorderSetupPanel borderSetupPanel = new BorderSetupPanel(frame);
         topPanel.add(borderSetupPanel);
         
         // Set layout for the container

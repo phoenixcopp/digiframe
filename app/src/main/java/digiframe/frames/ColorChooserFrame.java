@@ -10,9 +10,10 @@ public class ColorChooserFrame extends JFrame {
     public ColorChooserFrame(Frame frame, ChooseColorPanel chooseColorPanel) {
         this.frame = frame;
         setTitle("Color Chooser");
-        setSize(650, 400);
+        setSize(500, 270);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(194, 194, 194));
         add(chooseColorPanel);
     }
 

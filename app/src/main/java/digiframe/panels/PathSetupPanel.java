@@ -2,17 +2,39 @@ package digiframe.panels;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
+import digiframe.frames.Frame;
 import digiframe.interactions.ChoosePathButton;
+import digiframe.interactions.PathDisplayInput;
+import digiframe.interactions.TimeIntervalInput;
 
 public class PathSetupPanel extends JPanel {
 
-    public PathSetupPanel(ChoosePathButton choosePathButton) {
-        setLayout(new FlowLayout());
-        setOpaque(false)   ;
-        add(choosePathButton);
+    public PathSetupPanel(Frame frame) {
+        setLayout(new GridLayout(2,1));
+        setOpaque(false);
+
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new FlowLayout());
+        topPanel.setOpaque(false);
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new FlowLayout());
+        bottomPanel.setOpaque(false);
+
+        PathDisplayInput pathDisplayInput = new PathDisplayInput(null);
+        ChoosePathButton choosePathButton = new ChoosePathButton(frame, pathDisplayInput);
+        TimeIntervalInput timeIntervalInput = new TimeIntervalInput(choosePathButton);
+
+        topPanel.add(choosePathButton);
+        topPanel.add(timeIntervalInput);
+        bottomPanel.add(pathDisplayInput);
+
+        add(topPanel);
+        add(bottomPanel);
+
         Border border = BorderFactory.createLineBorder(Color.BLUE, 2);
         setBorder(border);
     }
