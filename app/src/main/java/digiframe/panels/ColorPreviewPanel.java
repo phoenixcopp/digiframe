@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 import digiframe.interactions.BorderColorChooser;
 
 public class ColorPreviewPanel extends JPanel  {
