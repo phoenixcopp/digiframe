@@ -2,6 +2,28 @@
 Eventual Ideas:
 - when program launched, goes back to state it was in before it was closed last
 - connect to google photos
-- suffle a folder of photos 
- - add transisiton effects
+- add transisiton effects
 - use new UI tool/library to make look better
+
+
+To set up Google Picker API in a Java Swing project like yours, you need to understand that the Picker API is a JavaScript API intended for web applications.
+However, you can still use it in a desktop Java app by embedding a browser component (like JavaFX WebView or JxBrowser) and handling OAuth2 authentication.
+
+General Steps:
+1. Create a Google Cloud Project and Enable Picker API
+Go to Google Cloud Console.
+Create a project.
+Enable the Google Picker API and Google Drive API.
+Create OAuth 2.0 credentials (Client ID for Desktop or Web application).
+2. Set Up OAuth2 Authentication in Java
+Use a library like Google OAuth Client Library for Java or Google Drive API Java Quickstart for authentication.
+Obtain an access token.
+3. Embed a Browser in Your Java App
+Use JavaFX WebView (built-in with JavaFX) or a third-party browser like JxBrowser or Java Chromium Embedded Framework (JCEF).
+Display a minimal HTML page that loads the Picker API.
+4. Pass OAuth Token to Picker API in the Embedded Browser
+Inject the OAuth token into the HTML/JavaScript context.
+Use JavaScript to launch the Picker and handle file selection.
+5. Communicate Selection Back to Java
+Use the browser’s Java-JavaScript bridge to send the selected file(s) back to your Java code.
+s
