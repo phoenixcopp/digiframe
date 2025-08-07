@@ -23,11 +23,12 @@ repositories {
 
 dependencies {
     // Use JUnit Jupiter for testing.
-    testImplementation libs.junit.jupiter
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.10.2'
 
     // This dependency is used by the application.
-    implementation libs.guava
+    implementation "org.openjfx:javafx-controls:17:win"
+    implementation "org.openjfx:javafx-web:17:win"
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -44,6 +45,8 @@ test {
 }
 
 jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
     // Add the main class to the JAR manifest.
     manifest {
         attributes(
