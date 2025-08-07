@@ -23,36 +23,4 @@ public class PickerBrowserPanel extends JPanel {
             jfxPanel.setScene(new Scene(webView));
         }); 
     }
-
-    /* private String getPickerHtml(String oauthToken, String apiKey) {
-        return """
-        <html>
-        <head>
-        <script type="text/javascript">
-        function onApiLoad() {
-          gapi.load('picker', {'callback': onPickerApiLoad});
-        }
-        function onPickerApiLoad() {
-          var picker = new google.picker.PickerBuilder()
-            .addView(google.picker.ViewId.DOCS)
-            .setOAuthToken('""" + oauthToken + """')
-            .setDeveloperKey('""" + apiKey + ""')
-            .setCallback(pickerCallback)
-            .build();
-          picker.setVisible(true);
-        }
-        function pickerCallback(data) {
-          if (data.action == google.picker.Action.PICKED) {
-            var fileId = data.docs[0].id;
-            alert("Picked file ID: " + fileId);
-            // TODO: communicate with Java via bridge if needed
-          }
-        }
-        </script>
-        <script src="https://apis.google.com/js/api.js?onload=onApiLoad"></script>
-        </head>
-        <body></body>
-        </html>
-        """;
-    } */
 }
