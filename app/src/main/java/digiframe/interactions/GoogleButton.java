@@ -20,7 +20,7 @@ public class GoogleButton extends JButton implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        PickerBrowserPanel browserPanel = new PickerBrowserPanel("YOUR_OAUTH_TOKEN", "YOUR_API_KEY");
+        PickerBrowserPanel browserPanel = new PickerBrowserPanel();
         JFrame frame = new JFrame("Google Picker");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(900, 700);

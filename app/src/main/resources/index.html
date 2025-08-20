@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Picker API Quickstart</title>
+  <meta charset="utf-8" />
+</head>
+<body>
+<p>Picker API API Quickstart</p>
+
+<!--Add buttons to initiate auth sequence and sign out-->
+<button id="authorize_button" onclick="handleAuthClick()">Authorize with Google</button>
+<button id="signout_button" onclick="handleSignoutClick()" style="display: none;">Sign Out</button>
+<button id="picker_button" onclick="createPicker()" style="display: none;">Open File Picker</button>
+
+<pre id="content" style="white-space: pre-wrap;"></pre>
+
+<script type="text/javascript">
+  // Authorization scopes required by the API
+  const SCOPES = 'https://www.googleapis.com/auth/drive.file';
+  const CLIENT_ID = '197371438807-fqlf1vdirbmianj0st3lj1ajssrng920.apps.googleusercontent.com';
+  const API_KEY = 'AIzaSyA3AyU_x_c1nNzEucexPuUxCf0380fG7mY';
+  const REDIRECT_URI = 'http://localhost:8080';
+
+  let accessToken = null;
+  let pickerApiLoaded = false;
+
+  // Check for OAuth response in URL when page loads
+  function checkForOAuthResponse() {
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const fragment = new URLSearchParams(window.location.hash.substring(1));
+    
+    // Look for access token in URL fragment (implicit flow)
+    const accessTokenFromUrl = fragment.get('access_token');
+    const error = urlParams.get('error') || fragment.get('error');
+    
+    if (error) {
+      document.getElementById('content').innerText = 'OAuth error: ' + error;
+      return;
+    }
+    
+    if (accessTokenFromUrl) {
+      accessToken = accessTokenFromUrl;
+      
+      // Clear the URL to remove the token
+      window.history.replaceState({}, document.title, window.location.pathname);
+      
+      // Update UI
+      document.getElementById('authorize_button').style.display = 'none';
+      document.getElementById('signout_button').style.display = 'inline-block';
+      document.getElementById('picker_button').style.display = 'inline-block';
+      document.getElementById('content').innerText = 'Authentication successful! You can now open the file picker.';
+      
+      return true;
+    }
+    
+    return false;
+  }
+
+  // Load Google Picker API
+  function loadPickerApi() {
+    
+    gapi.load('picker', function() {
+      pickerApiLoaded = true;
+      
+      // If we already have a token from URL, enable the picker button
+      if (accessToken) {
+        document.getElementById('picker_button').style.display = 'inline-block';
+      }
+      
+      document.getElementById('content').innerText += '\nPicker API ready. Click "Authorize with Google" to begin.';
+    });
+  }
+
+  function handleAuthClick() {
+    // Build OAuth URL manually for implicit flow
+    const authUrl = 'https://accounts.google.com/o/oauth2/v2/auth?' +
+      'client_id=' + encodeURIComponent(CLIENT_ID) +
+      '&redirect_uri=' + encodeURIComponent(REDIRECT_URI) +
+      '&scope=' + encodeURIComponent(SCOPES) +
+      '&response_type=token' +
+      '&include_granted_scopes=true' +
+      '&prompt=consent';
+    
+    document.getElementById('content').innerText = 'Redirecting to Google for authentication...';
+    
+    // Redirect to Google OAuth
+    window.location.href = authUrl;
+  }
+
+  function handleSignoutClick() {
+    if (accessToken) {
+      // Revoke the token
+      fetch('https://oauth2.googleapis.com/revoke?token=' + accessToken, {
+        method: 'POST'
+      }).then(() => {
+        document.getElementById('content').innerText = 'You have been signed out.';
+      }).catch((error) => {
+        document.getElementById('content').innerText = 'Error revoking token: ' + error.message;
+      });
+  
+      accessToken = null;
+    }
+    
+    // Reset UI
+    document.getElementById('authorize_button').style.display = 'inline-block';
+    document.getElementById('signout_button').style.display = 'none';
+    document.getElementById('picker_button').style.display = 'none';
+    document.getElementById('content').innerText = 'Signed out. Click "Authorize with Google" to sign in again.';
+  }
+
+  function createPicker() {
+
+    if (!accessToken) {
+      document.getElementById('content').innerText = 'No access token. Please authorize first.';
+      return;
+    }
+    
+    if (!pickerApiLoaded) {
+      document.getElementById('content').innerText = 'Picker API not loaded yet.';
+      return;
+    }
+
+    try {
+      const view = new google.picker.View(google.picker.ViewId.DOCS);
+      view.setMimeTypes('image/png,image/jpeg,image/jpg,application/pdf');
+      
+      const picker = new google.picker.PickerBuilder()
+        .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
+        .setDeveloperKey(API_KEY)
+        .setOAuthToken(accessToken)
+        .addView(view)
+        .addView(new google.picker.DocsUploadView())
+        .setCallback(pickerCallback)
+        .build();
+      
+      picker.setVisible(true);
+      
+    } catch (error) {
+      document.getElementById('content').innerText = 'Failed to create picker: ' + error.message;
+    }
+  }
+
+  function pickerCallback(data) {
+    
+    if (data.action === google.picker.Action.PICKED) {
+      let text = 'Selected Files:\n\n';
+      const docs = data[google.picker.Response.DOCUMENTS];
+      
+      docs.forEach(function(doc, index) {
+        const fileId = doc[google.picker.Document.ID];
+        const fileName = doc[google.picker.Document.NAME];
+        const mimeType = doc[google.picker.Document.MIME_TYPE];
+        
+        text += `File ${index + 1}:\n`;
+        text += `  Name: ${fileName}\n`;
+        text += `  ID: ${fileId}\n`;
+        text += `  Type: ${mimeType}\n\n`;
+      });
+      
+      document.getElementById('content').innerText = text;
+      
+    } else if (data.action === google.picker.Action.CANCEL) {
+      document.getElementById('content').innerText = 'File selection was cancelled.';
+    }
+  }
+
+  // Error handling
+  window.onerror = function(msg, url, lineNo, columnNo, error) {
+    return false;
+  };
+
+  // Initialize when page loads
+  window.onload = function() {
+
+    // Check if we're returning from OAuth
+    const hasToken = checkForOAuthResponse();
+    
+    if (!hasToken) {
+      document.getElementById('content').innerText = 'Ready! Click "Authorize with Google" to begin.';
+    }
+    
+    // Load the Picker API
+    loadPickerApi();
+  };
+</script>
+
+<script async defer src="https://apis.google.com/js/api.js"></script>
+</body>
+</html>
